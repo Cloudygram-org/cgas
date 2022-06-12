@@ -180,8 +180,7 @@ async def upload_file(phone_number: str, file_name: str, file_stream: BytesIO, m
             try:
                 updates: telethon.tl.custom.message.Message = await client.send_file(entity = int(chatid), 
                         file=file_stream, 
-                        attributes=[DocumentAttributeFilename(file_name)],
-                        progress_callback=Progress.callbackUpload)
+                        attributes=[DocumentAttributeFilename(file_name)])
             except Exception as e:
                 traceback.print_exc()
                 raise TTFileTransferException(str(e))
