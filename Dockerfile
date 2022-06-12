@@ -10,5 +10,5 @@ COPY keys.json keys.json
 COPY requirements.txt requirements.txt
 COPY cloudygram_api_server cloudygram_api_server
 RUN pip3 install -r requirements.txt
-COPY telethon /opt/Telegram/lib/python3.9/site-packages/telethon
+#COPY telethon /opt/Telegram/lib/python3.9/site-packages/telethon
 CMD [ "python3", "-u" ,"main.py" ]
