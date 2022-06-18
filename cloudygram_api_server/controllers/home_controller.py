@@ -26,10 +26,10 @@ class HomeController(object):
 
     @router.post("/signin")
     async def signin_req(response: Response, 
-                        phoneNumber: str = Body(), 
-                        phoneCodeHash: str = Body(), 
-                        phoneCode: str = Body(), 
-                        password: str = Body()):
+                        phoneNumber: str = Body(default=None), 
+                        phoneCodeHash: str = Body(default=None), 
+                        phoneCode: str = Body(default=None), 
+                        password: str = Body(default=None)):
         try:
             result = await signin(
                         phoneNumber,

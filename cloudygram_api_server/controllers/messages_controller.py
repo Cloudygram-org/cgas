@@ -19,7 +19,7 @@ class MessagesController(object):
         return BaseResponse(isSuccess=False, message=result)
 
     @router.post("/{phonenumber}/deleteMessages")
-    async def delete_messages_req(phonenumber: str, response: Response, ids: List[str] = Body()):
+    async def delete_messages_req(phonenumber: str, response: Response, ids: List[str] = Body(default=None)):
         message_ids = ids
         try:
             await delete_messages(phonenumber, message_ids)
