@@ -1,25 +1,18 @@
-from email.mime import base
-from gc import callbacks
-import imp
-
-from attr import attr
-from cloudygram_api_server.models.asyncronous.base_response import BaseResponse
 from cloudygram_api_server.telethon.exceptions import TTUnathorizedException, TTGenericException, TTSignInException, TTFileTransferException
-from telethon.tl.types import Message, MessageMediaDocument, DocumentAttributeFilename, UpdateShortMessage
-from telethon.tl.types import User, InputPeerChat, InputUserSelf, PeerChat, PeerChannel, InputPeerUser
+from cloudygram_api_server.models.asyncronous.base_response import BaseResponse
+from telethon.tl.types import Message, DocumentAttributeFilename, UpdateShortMessage
+from telethon.tl.types import User, InputPeerChat, InputUserSelf
 from telethon.tl.types.messages import AffectedMessages
-import telethon.tl.custom
 from telethon.tl.types.auth import SentCode
 from telethon.tl import functions, types
 from telethon import TelegramClient
-from .parser import parse_updates, get_message_id, with_new_ref
-from typing import List, Tuple, Optional
+import telethon.tl.custom
+from .parser import get_message_id
+from typing import List
 from pathlib import Path
 from io import BytesIO
 import os
-#from cloudygram_api_server.scripts.utilities import Progress
 import traceback
-import sys
 
 WORKDIR = ""
 API_ID = ""
@@ -35,7 +28,6 @@ def init_telethon(api_id: str, api_hash: str, workdir: str = "sessions"):
 
 
 class CgDownloadResult():
-
     def __init__(self, message_json, has_ref_changed):
         if has_ref_changed:
             self.message_id = get_message_id(message_json)

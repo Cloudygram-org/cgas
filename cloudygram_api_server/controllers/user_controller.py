@@ -1,4 +1,4 @@
-from email.policy import HTTP
+from email.policy import HTTP, default
 from http.client import OK
 from operator import truediv
 from cloudygram_api_server.models.asyncronous.user_model import *
@@ -27,7 +27,7 @@ class UserController:
         return user
 
     @router.post("/{phonenumber}/uploadFile")
-    async def upload_file_req(phonenumber: str, file: UploadFile, response: Response, mimeType: str = Form(), chatid: str = Form()):
+    async def upload_file_req(phonenumber: str, file: UploadFile, response: Response, mimeType: str = Form(default=None), chatid: str = Form(default=None)):
         response.headers["Content-Type"] = "application/json"
         phone_number = phonenumber
         file_stream = file
@@ -43,7 +43,7 @@ class UserController:
         return result
 
     @router.post("/{phonenumber}/downloadFile")
-    async def download_file_req(phonenumber: str, response: Response, message: str = Body(), path: str = Body()):
+    async def download_file_req(phonenumber: str, response: Response, message: str = Body(default=None), path: str = Body(default=None)):
         response.headers["Content-Type"] = "application/json"
         try:
             phone_number = phonenumber
